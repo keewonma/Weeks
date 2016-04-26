@@ -11,6 +11,10 @@ import ElasticTransition
 
 class ThirdViewController: UIViewController {
 
+    @IBOutlet weak var ImageView: UIImageView!
+    
+    var image = UIImage()
+    
     var transition: ElasticTransition!
     let leftGestureRecognizer = UIScreenEdgePanGestureRecognizer()
     
@@ -18,6 +22,8 @@ class ThirdViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //collection view
+        self.ImageView.image = self.image
         
         //setup gesture recognizers
         leftGestureRecognizer.addTarget(self, action: "handleLeftPan:")
