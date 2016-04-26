@@ -20,8 +20,11 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iPhone 6_4@1x" translatesAutoresizingMaskIntoConstraints="NO" id="ILG-qH-0tN">
                                 <rect key="frame" x="-7" y="-6" width="387" height="679"/>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fwk-uG-4AT">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fwk-uG-4AT">
                                 <rect key="frame" x="75" y="170" width="236" height="451"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="236" id="bzq-Tb-Rsy"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tq9-97-qXQ">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -29,17 +32,37 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="tJs-R6-IT5">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="tJs-R6-IT5" customClass="CollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V37-iA-j4b">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="V37-iA-j4b" firstAttribute="leading" secondItem="tJs-R6-IT5" secondAttribute="leading" id="VEh-Oy-chp"/>
+                                            <constraint firstItem="V37-iA-j4b" firstAttribute="top" secondItem="tJs-R6-IT5" secondAttribute="top" id="aJ2-9E-G54"/>
+                                            <constraint firstAttribute="trailing" secondItem="V37-iA-j4b" secondAttribute="trailing" id="bVx-zq-X00"/>
+                                            <constraint firstAttribute="bottom" secondItem="V37-iA-j4b" secondAttribute="bottom" id="mIF-5d-Xuw"/>
+                                        </constraints>
                                         <size key="customSize" width="50" height="50"/>
+                                        <connections>
+                                            <outlet property="ImageView" destination="V37-iA-j4b" id="Hlq-IS-Lo2"/>
+                                            <outlet property="imageView" destination="V37-iA-j4b" id="xmK-uO-4CF"/>
+                                            <segue destination="a6x-Hg-Lzf" kind="show" identifier="Image" action="showDetailViewController:sender:" id="h1n-Y0-GF9"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="yoJ-fp-5Nf"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="xeW-Yf-EGj"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -47,6 +70,7 @@
                     <navigationItem key="navigationItem" id="M0o-VM-adD"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="collectionView" destination="fwk-uG-4AT" id="LNm-aC-DR8"/>
                         <segue destination="4Uz-f7-cFC" kind="show" identifier="GreenBlue" id="vVq-aL-5Ug"/>
                         <segue destination="a6x-Hg-Lzf" kind="show" identifier="RedBlue" id="fgA-8g-ivl"/>
                     </connections>
@@ -91,6 +115,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bac-ms-h5e">
+                                <rect key="frame" x="20" y="59" width="343" height="550"/>
+                            </imageView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="iPhone 6_2@1x" translatesAutoresizingMaskIntoConstraints="NO" id="7IJ-vx-0I6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
@@ -98,6 +125,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="ImageView" destination="Bac-ms-h5e" id="v6X-K0-fex"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KvG-u9-xSs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -109,4 +139,7 @@
         <image name="iPhone 6_3@1x" width="375" height="667"/>
         <image name="iPhone 6_4@1x" width="375" height="667"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="h1n-Y0-GF9"/>
+    </inferredMetricsTieBreakers>
 </document>
