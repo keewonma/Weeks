@@ -9,8 +9,13 @@
 import UIKit
 import ElasticTransition
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    let imageArray = [UIImage(named: "badge-video"), UIImage(named: "badge-show")]
+    
+    //Elastic Transition
     var transition = ElasticTransition()
     let leftGestureRecognizer = UIScreenEdgePanGestureRecognizer()
     let rightGestureRecognizer = UIScreenEdgePanGestureRecognizer()
@@ -33,12 +38,26 @@ class ViewController: UIViewController {
         rightGestureRecognizer.edges = .Right
         view.addGestureRecognizer(rightGestureRecognizer)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func collectionView(collectionView: UICollectionView, numberofItemsinSection section: Int) -> Int {
+        
+        return self.imageArray.count
+    
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellforItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
+        
+        cell.imageView?.image = self.imageArray[indexPath.row]
+        
+        
+    }
     //use your own panGestureRecognizer and call dissmissInteractiveTransition in your handler
     
     func handleLeftPan(pan: UIPanGestureRecognizer) {
