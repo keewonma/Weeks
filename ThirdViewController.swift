@@ -22,7 +22,6 @@ extension UIColor {
 }
 
 class ThirdViewController: UIViewController, CircleMenuDelegate {
-
     
     var transition: ElasticTransition!
     let leftGestureRecognizer = UIScreenEdgePanGestureRecognizer()
@@ -61,7 +60,7 @@ class ThirdViewController: UIViewController, CircleMenuDelegate {
         view.addGestureRecognizer(leftGestureRecognizer)
     }
     
-    // MARK: Circle Menu Configure
+    // MARK: Circle Menu Button Configure
 
     func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int) {
         button.backgroundColor = items[atIndex].color
