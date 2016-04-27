@@ -9,25 +9,46 @@
 import UIKit
 import ElasticTransition
 
-class ViewController: UIViewController, UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
-
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource   {
+   
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let imageArray = [UIImage(named: "badge-video"), UIImage(named: "badge-show")]
+    //let label = ["1", "2", "3", "4"]
+    //let imageArray = [UIImage(named: "badge-show"), UIImage(named: "badge-show"), UIImage(named: "badge-show"), UIImage(named: "badge-show")]
+    
+    // set how many images
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return  52
+    }
+    
+    //add images
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
+        
+        //cell.imageView?.image = self.imageArray[indexPath.row]
+        cell.imageView.image = UIImage(named: "badge-show")
+        
+        return cell
+    }
     
     //Elastic Transition
     var transition = ElasticTransition()
     let leftGestureRecognizer = UIScreenEdgePanGestureRecognizer()
     let rightGestureRecognizer = UIScreenEdgePanGestureRecognizer()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "iPhone 6_4@1x")!)
+        
         // setup the elastic transition
         transition.sticky = true
         transition.showShadow = true
-        transition.stiffness = 1.5
+        transition.stiffness = 0.4
         transition.radiusFactor = 0.4
-        transition.panThreshold = 0.4
+        transition.panThreshold = 0.5
         transition.transformType = .TranslateMid
         
         //setup gesture recognizers
@@ -44,20 +65,8 @@ class ViewController: UIViewController, UICollectionView, UICollectionViewDataSo
         // Dispose of any resources that can be recreated.
     }
     
-    func collectionView(collectionView: UICollectionView, numberofItemsinSection section: Int) -> Int {
-        
-        return self.imageArray.count
     
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellforItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
-        
-        cell.imageView?.image = self.imageArray[indexPath.row]
-        
-        
-    }
+    //Elastic Transition
     //use your own panGestureRecognizer and call dissmissInteractiveTransition in your handler
     
     func handleLeftPan(pan: UIPanGestureRecognizer) {
@@ -80,9 +89,12 @@ class ViewController: UIViewController, UICollectionView, UICollectionViewDataSo
     //In prepareForSegue, assign the transition to be the transitioningDelegate of the destinationViewController. Also, dont forget to set the modalPresentationStyle to .Custom
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        //Elastic Transition
         let vc = segue.destinationViewController
         vc.transitioningDelegate = transition
         vc.modalPresentationStyle = .Custom
+        
         if segue.identifier == "GreenBlue" {
             if let vc = vc as? SecondViewController {
                 vc.transition = transition
@@ -92,9 +104,10 @@ class ViewController: UIViewController, UICollectionView, UICollectionViewDataSo
                 vc.transition = transition
             }
         }
+        
     }
     
-    // MARK: UI Setup
+    // UI Setup
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent

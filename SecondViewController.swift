@@ -20,6 +20,8 @@ class SecondViewController: UIViewController {
         super.viewDidLoad()
         
         // setup gesture recognizer
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "iPhone 6_3@1x")!)
+
         rightGestureRecognizer.addTarget(self, action: "handleRightPan:")
         rightGestureRecognizer.edges = .Right
         view.addGestureRecognizer(rightGestureRecognizer)
