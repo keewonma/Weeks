@@ -9,6 +9,7 @@
 import UIKit
 import ElasticTransition
 
+
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource   {
    
     
@@ -17,12 +18,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     //let label = ["1", "2", "3", "4"]
     //let imageArray = [UIImage(named: "badge-show"), UIImage(named: "badge-show"), UIImage(named: "badge-show"), UIImage(named: "badge-show")]
     
-    // set how many images
+    // MARK: set how many images in collection view
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  52
     }
     
-    //add images
+    // MARK: add images to collection view
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
@@ -33,7 +34,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return cell
     }
     
-    //Elastic Transition
+    // MARK: Elastic Transition
     var transition = ElasticTransition()
     let leftGestureRecognizer = UIScreenEdgePanGestureRecognizer()
     let rightGestureRecognizer = UIScreenEdgePanGestureRecognizer()
